@@ -31,6 +31,8 @@ class TotalEch < Formula
       "--cert-dir", var/"lib/total-ech/certs"
     ]
     working_dir var/"lib/total-ech"
+    log_path var/"log/total-ech.log"
+    error_log_path var/"log/total-ech.log"
     keep_alive true
     process_type :background
   end

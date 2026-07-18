@@ -6,8 +6,7 @@ Official Homebrew tap for
 ## Install Total ECH
 
 ```bash
-brew tap cewrtcom/tap
-brew install total-ech
+brew install cewrtcom/tap/total-ech
 brew services start total-ech
 ```
 
@@ -31,6 +30,12 @@ Manage the service with:
 brew services info total-ech
 brew services restart total-ech
 brew services stop total-ech
+```
+
+Service logs are written to:
+
+```text
+$(brew --prefix)/var/log/total-ech.log
 ```
 
 See the [Total ECH README](https://github.com/cewrtcom/total-ech-rs#readme)
