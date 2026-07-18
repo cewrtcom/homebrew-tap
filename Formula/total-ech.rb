@@ -12,10 +12,6 @@ class TotalEch < Formula
     system "cargo", "install", *std_cargo_args
   end
 
-  def post_install
-    (var/"lib/total-ech").mkpath
-  end
-
   def caveats
     <<~EOS
       Start Total ECH with:
@@ -32,7 +28,7 @@ class TotalEch < Formula
     run [
       opt_bin/"total-ech-rs",
       "--listen", "127.0.0.1:8443",
-      "--cert-dir", var/"lib/total-ech/certs",
+      "--cert-dir", var/"lib/total-ech/certs"
     ]
     working_dir var/"lib/total-ech"
     keep_alive true
