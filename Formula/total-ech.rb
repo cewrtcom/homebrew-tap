@@ -7,6 +7,11 @@ class TotalEch < Formula
   revision 1
   head "https://github.com/cewrtcom/total-ech-rs.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/cewrtcom/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe: "6495dd74c8b51bceba11a1bc43be145eeaa0c48a30165d90ed9dfafcc0c5c492"
+  end
+
   depends_on "rust" => :build
 
   def install
