@@ -9,21 +9,12 @@ on:
 
 jobs:
   test-bot:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-15-intel, macos-26]
-        include:
-          - os: ubuntu-latest
-            container:
-              image: ghcr.io/homebrew/brew:main
-              options: --privileged
-    runs-on: ${{ matrix.os }}
-    container: ${{ fromJSON(toJSON(matrix.container)) }} # zizmor: ignore[unpinned-images]
+    runs-on: macos-26
     permissions:
       actions: read
       checks: read
       contents: read
+      packages: read
       pull-requests: read
     steps:
       - name: Set up Homebrew
@@ -36,8 +27,8 @@ jobs:
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ matrix.os }}-rubygems-
+          key: macos-26-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: macos-26-rubygems-
 
       - run: brew test-bot --only-cleanup-before
 
@@ -45,11 +36,24 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae
+      - name: Encode registry token
+        id: registry-token
+        if: github.event_name == 'pull_request'
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          encoded_token=$(printf '%s' "${TOKEN}" | base64 | tr -d '\n')
+          echo "::add-mask::${encoded_token}"
+          echo "token=${encoded_token}" >> "${GITHUB_OUTPUT}"
+
+      - run: brew test-bot --only-formulae --root-url=https://ghcr.io/v2/cewrtcom/tap
+        if: github.event_name == 'pull_request'
+        env:
+          HOMEBREW_DOCKER_REGISTRY_TOKEN: ${{ steps.registry-token.outputs.token }}
 
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: bottles_${{ matrix.os }}
+          name: bottles_macos-26
           path: '*.bottle.*'

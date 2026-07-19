@@ -10,6 +10,9 @@ brew install cewrtcom/tap/total-ech
 brew services start total-ech
 ```
 
+Apple Silicon macOS installs a prebuilt bottle. Other platforms fall back to a
+source build and require the Rust toolchain.
+
 The service listens on:
 
 ```text
