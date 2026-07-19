@@ -4,6 +4,7 @@ class TotalEch < Formula
   url "https://github.com/cewrtcom/total-ech-rs/archive/refs/tags/v0.1.0.tar.gz"
   sha256 "7f9a9f4a9f0304c195760b9daa45e5c081af4bcdaf48f3c108e1ef2d39fe0198"
   license "MIT"
+  revision 1
   head "https://github.com/cewrtcom/total-ech-rs.git", branch: "main"
 
   depends_on "rust" => :build
