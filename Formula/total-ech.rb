@@ -8,7 +8,7 @@ class TotalEch < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/cewrtcom/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe: "6495dd74c8b51bceba11a1bc43be145eeaa0c48a30165d90ed9dfafcc0c5c492"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe: "b90e11fca36cd40c1afd2a65fe838563f4abc8a9e49f6197dc9eecf072211fa2"
   end
 
   depends_on "rust" => :build
