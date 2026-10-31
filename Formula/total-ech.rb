@@ -1,10 +1,9 @@
 class TotalEch < Formula
   desc "Local HTTPS DoH server that synthesizes Cloudflare and Meta ECH records"
   homepage "https://github.com/cewrtcom/total-ech-rs"
-  url "https://github.com/cewrtcom/total-ech-rs/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "7f9a9f4a9f0304c195760b9daa45e5c081af4bcdaf48f3c108e1ef2d39fe0198"
+  url "https://github.com/cewrtcom/total-ech-rs/archive/refs/tags/v0.1.1.tar.gz"
+  sha256 "8aefb0db001b31d835ed3762dc9cde2874d5cf69dee8de305bff74c0f974504c"
   license "MIT"
-  revision 1
   head "https://github.com/cewrtcom/total-ech-rs.git", branch: "main"
 
   bottle do
